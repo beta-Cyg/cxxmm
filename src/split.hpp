@@ -1,8 +1,8 @@
-#ifndef SPILT_HPP
-#define SPILT_HPP
+#ifndef SPLIT_HPP
+#define SPLIT_HPP
 
 namespace cygnus{
-	std::vector<std::string> spilt(std::string str,const std::string& delimiter){
+	std::vector<std::string> split(std::string str,const std::string& delimiter){
 		std::vector<std::string>result;
 		std::size_t pos;
 		while((pos=str.find(delimiter))<str.size()){

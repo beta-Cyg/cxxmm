@@ -11,7 +11,7 @@
 
 #include"log.hpp"
 #include"result.hpp"
-#include"spilt.hpp"
+#include"split.hpp"
 #include"tree.hpp"
 #include"init.hpp"
 
@@ -37,7 +37,7 @@ void gen_name_queue(cygnus::tree& module_files,const char* name){
 			while(s[0]==' ' or s[0]=='\t')s.erase(0,1);
 		};
 		f(Tmp);
-		vector<string>line=cygnus::spilt(Tmp," ");
+		vector<string>line=cygnus::split(Tmp," ");
 		for(auto& i:line)
 			f(i);
 		//for(int i=0;i<line.size();i++)fprintf(stderr,"line[%d]: %c %s\n",i,line[i].back(),line[i].c_str());//debug
