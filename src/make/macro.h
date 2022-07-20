@@ -1,5 +1,5 @@
-#ifndef MACRO_HPP
-#define MACRO_HPP
+#ifndef MACRO_H
+#define MACRO_H
 
 #ifndef BUFFER_SIZE
 #define BUFFER_SIZE 512

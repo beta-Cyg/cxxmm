@@ -1,15 +1,20 @@
-#ifndef INIT_HPP
-#define INIT_HPP
+#ifndef INIT_H
+#define INIT_H
+
+#include<cstdio>
+#include<cstring>
+#include"log.h"
+#include"macro.h"
 
 namespace cygnus{
 	void init(){
-		//rintf("init the program...\n");
+		//printf("init the program...\n");
 		FILE* file=fopen("cxxmmfile","r");
 		std::strcpy(COMPILER,"g++");
 		std::strcpy(OPTION,"-fmodules-ts");
 		std::strcpy(SUFFIX,".cxx");
 		if(file==nullptr){
-			warning("cannot find cxxmmfile");
+			warn("cannot find cxxmmfile");
 			return;
 		}
 		char var[BUFFER_SIZE],val[BUFFER_SIZE];

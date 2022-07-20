@@ -1,5 +1,5 @@
 Main: *.cpp *.cxx
-	cxxmm main.cpp
+	cxxmm compile main.cpp
 
 clean:
 	rm -rf gcm.cache/

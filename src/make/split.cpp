@@ -1,5 +1,4 @@
-#ifndef SPLIT_HPP
-#define SPLIT_HPP
+#include"split.h"
 
 namespace cygnus{
 	std::vector<std::string> split(std::string str,const std::string& delimiter){
@@ -13,5 +12,3 @@ namespace cygnus{
 		return result;
 	}
 }
-
-#endif
