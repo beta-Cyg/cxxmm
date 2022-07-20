@@ -20,4 +20,4 @@ As the title shows, this program is a module manager for C++. But in fact, now i
 It probably fails, so we advise you to manually add $(INSTALL_PATH)/build to $PATH.
 
 ## How to use cxxmm?
-For example, there is a C++ file 'main.cpp', and it include a module 'test'. You just need to type 'cxxmm main.cpp' then there will generate a executable file 'main'.
+For example, there is a C++ file ```main.cpp```, and it include a module ```test```. You just need to type ```cxxmm main.cpp``` then there will generate a executable file ```main```.
