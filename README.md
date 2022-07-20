@@ -5,25 +5,18 @@ As the title shows, this program is a module manager for C++. But in fact, now i
 
 ## How to install cxxmm?
 - Preparations
-To install cxxmm, you need a C++ compiler (g++/clang++/...) and make.
 
-If you want to change your compile options, then edit makefile.
+  To install cxxmm, you need a C++ compiler (g++/clang++/...) and make.
+
+  If you want to change your compile options, then edit makefile.
 
 - Steps
-1.
-```sh
-cd cxxmm/
-```
 
-2.
-```sh
-make
-```
+  1.```cd cxxmm/```
 
-3.
-```sh
-make install
-```
+  2.```make```
+
+  3.```make install```
 It probably fails, so we advise you to manually add $(INSTALL_PATH)/build to $PATH.
 
 ## How to use cxxmm?
