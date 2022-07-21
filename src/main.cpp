@@ -30,7 +30,8 @@ int main(int argc,char **argv){
 				file_name.push_back(args[i]);
 			cygnus::make(file_name);
 		}
-	}
+	}else
+	if(command=="pack");
 
 	return 0;
 }

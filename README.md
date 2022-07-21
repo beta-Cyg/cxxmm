@@ -4,9 +4,11 @@
 As the title shows, this program is a module manager for C++. But in fact, now it's only a tool to help you compile C++ module easily.
 
 ## How to install cxxmm?
-- Preparations
+- Requests
 
-  To install cxxmm, you need a C++ compiler (g++/clang++/...) and make.
+  To install cxxmm, you need a C++ compiler(g++/clang++/...), python3 and make.
+
+- Preparations
 
   If you want to change your compile options, then edit makefile.
 

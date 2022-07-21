@@ -1,5 +1,5 @@
 OPT=-O2 -Wall
-VER=-std=c++11
+VER=-std=c++17
 SHELLRC=~/.bashrc
 LINK_PATH=lib/
 PWD:=$(shell pwd)
