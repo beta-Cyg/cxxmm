@@ -1,10 +1,11 @@
 #include<cstdio>
 #include"make.h"
+#include"version.h"
 
 std::vector<std::string>args;
 constexpr char helpinfo[]{
 	"Usage: cxxmm <command> <options> <args>\n"
-	"cxxmm v0.0.1 by beta-cyg\n"
+	"cxxmm " CXXMM_VERSION " by beta-cyg\n"
 	"GPLv3.0 License\n"
 };
 

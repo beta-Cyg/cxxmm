@@ -1,5 +1,5 @@
 OPT=-O2 -Wall
-VER=-std=c++17
+VER=-std=c++11
 SHELLRC=~/.bashrc
 LINK_PATH=lib/
 PWD:=$(shell pwd)
@@ -9,7 +9,7 @@ compile: main
 install: bin/cxxmm shell/pack.py
 	@echo "export PATH=\"$(PWD)/build\":\"$(PWD)/shell\":$$PATH" >> $(SHELLRC)
 
-main: ini src/main.cpp
+main: ini make src/main.cpp
 	$(CXX) $(OPT) $(VER) src/main.cpp -o bin/cxxmm -L$(LINK_PATH) -lmake
 
 make: result split tree src/make.h src/make.cpp
