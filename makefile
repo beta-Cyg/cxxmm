@@ -6,10 +6,10 @@ PWD:=$(shell pwd)
 
 compile: main
 
-install: bin/cxxmm
-	@echo "export PATH=\"$(PWD)/build\":\$$PATH" >> $(SHELLRC)
+install: bin/cxxmm shell/pack.py
+	@echo "export PATH=\"$(PWD)/build\":\"$(PWD)/shell\":$$PATH" >> $(SHELLRC)
 
-main: ini make src/main.cpp
+main: ini src/main.cpp
 	$(CXX) $(OPT) $(VER) src/main.cpp -o bin/cxxmm -L$(LINK_PATH) -lmake
 
 make: result split tree src/make.h src/make.cpp
@@ -32,8 +32,11 @@ log: src/make/log.h src/make/log.cpp
 	$(CXX) $(OPT) $(VER) -c src/make/log.cpp -o lib/log.o
 	ar rcs lib/liblog.a lib/log.o
 
-test: bin/cxxmm
+test: bin/cxxmm shell/pack.py
 	@cd ctest&&make&&make clean
+	@cxxmm pack ctest
+	@cxxmm unpack ctest
+	@cxxmm remove ctest
 
 ini:
 	@mkdir -p bin/ lib/
