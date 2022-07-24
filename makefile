@@ -9,6 +9,9 @@ compile: main
 install: bin/cxxmm shell/pack.py
 	@echo "export PATH=\"$(PWD)/build\":\"$(PWD)/shell\":$$PATH" >> $(SHELLRC)
 
+cpm: cpm/*
+	   cd cpm/&&make
+
 main: ini make src/main.cpp
 	$(CXX) $(OPT) $(VER) src/main.cpp -o bin/cxxmm -L$(LINK_PATH) -lmake
 
@@ -43,3 +46,4 @@ ini:
 
 clean:
 	@rm -rf bin/ lib/
+	@cd cpm/&&make clean

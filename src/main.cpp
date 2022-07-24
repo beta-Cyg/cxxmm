@@ -44,7 +44,7 @@ int main(int argc,char **argv){
 				char tmp{'\0'};
 				while((tmp=std::fgetc(pipe))!=EOF)errorInfo.push_back(tmp);
 				std::fprintf(stderr,"%s",errorInfo.c_str());
-				return pclose(pipe);
+				return pclose(pipe)/256;
 			}
 		}
 	}else
@@ -60,7 +60,7 @@ int main(int argc,char **argv){
 				char tmp{'\0'};
 				while((tmp=std::fgetc(pipe))!=EOF)errorInfo.push_back(tmp);
 				std::fprintf(stderr,"%s",errorInfo.c_str());
-				return pclose(pipe);
+				return pclose(pipe)/256;
 			}
 		}
 	}else
@@ -76,7 +76,7 @@ int main(int argc,char **argv){
 				char tmp{'\0'};
 				while((tmp=std::fgetc(pipe))!=EOF)errorInfo.push_back(tmp);
 				std::fprintf(stderr,"%s",errorInfo.c_str());
-				return pclose(pipe);
+				return pclose(pipe)/256;
 			}
 		}
 	}
