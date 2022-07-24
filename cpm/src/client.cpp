@@ -1,12 +1,13 @@
 #include<iostream>
+#include<fstream>
 #include<string>
 #include<boost/array.hpp>
 #include<boost/asio.hpp>
 
 int main(int argc,char **argv){
 	try{
-		if(argc!=3){
-			std::cerr<<"Usage: client <host> <package>"<<std::endl;
+		if(argc!=4){
+			std::cerr<<"Usage: client <host> <package> <local package name>"<<std::endl;
 			return 1;
 		}
 		boost::asio::io_context io;
@@ -15,6 +16,8 @@ int main(int argc,char **argv){
 		boost::asio::ip::tcp::socket socket(io);
 		boost::asio::connect(socket,endpoints);
 		boost::asio::write(socket,boost::asio::buffer(std::string(argv[2])));
+
+		std::fstream fout(std::string(argv[3]),std::ios::out|std::ios::binary);
 		for(;;){
 			boost::array<char,128>buf;
 			boost::system::error_code error;
@@ -23,12 +26,12 @@ int main(int argc,char **argv){
 				break;
 			else if(error)
 				throw boost::system::system_error(error);
-			std::cout.write(buf.data(),len);
+			fout.write(buf.data(),len);
 		}
 	}
 	catch(std::exception& e){
 		std::cerr<<e.what()<<std::endl;
 	}
 
-	return 0;
+        return 0;
 }

@@ -73,3 +73,5 @@ As the title shows, this program is a module manager for C++. But in fact, now i
 
 ## Issues
 - cxxmm cannot print error information when pack.py has problems.
+
+# Cygnus Package Manager (cpm)
