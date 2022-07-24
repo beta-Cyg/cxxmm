@@ -5,6 +5,8 @@ As the title shows, this program is a module manager for C++. But in fact, now i
 
 [2022.07.22] now it supports some simple operations. (pack, unpack, remove)
 
+[2022.07.24] now it supports downloading packages.
+
 ## How to install cxxmm?
 - Requests
 
@@ -39,33 +41,43 @@ As the title shows, this program is a module manager for C++. But in fact, now i
 - Pack
 	
 	```sh
-	cxxmm pack [directory1] [directory2] ...
+	cpm pack [directory]
 	```
 	e.g.
 	```sh
-	cxxmm pack test/
+	cpm pack test/
 	```
-	cxxmm will generate a package ```test.tar```
+	cpm will generate a package ```test.tar```
 
 - Unpack
 	```sh
-	cxxmm unpack [package1] [package2] ...
+	cpmm unpack [package]
 	```
 	e.g.
 	```sh
-	cxxmm unpack test
+	cpm unpack test
 	```
-	cxxmm will unpack the package ```test.tar``` and generate a directory ```test/```
+	cpm will unpack the package ```test.tar``` and generate a directory ```test/```
 
 - Remove
 	```sh
-	cxxmm remove [package1] [package2] ...
+	cpm remove [package]
 	```
 	e.g.
 	```sh
-	cxxmm remove test
+	cpm remove test
 	```
-	cxxmm will remove the package ```test.tar```
+	cpm will remove the package ```test.tar```
+
+- Get
+	```sh
+	cpm get [package]
+	```
+	e.g.
+	```sh
+	cpm get test
+	```
+	cpm will remove the package ```test.tar```
 
 ## More Info
 - package format of cxxmm is tar
@@ -75,3 +87,10 @@ As the title shows, this program is a module manager for C++. But in fact, now i
 - cxxmm cannot print error information when pack.py has problems.
 
 # Cygnus Package Manager (cpm)
+
+## Paths
+- Server
+	package path defines in server.conf, you should specify the configuration file when you start the service
+
+- Client
+	server address defines in $(HOME)/.cpmadd

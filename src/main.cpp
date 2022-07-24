@@ -31,56 +31,7 @@ int main(int argc,char **argv){
 				file_name.push_back(args[i]);
 			cygnus::make(file_name);
 		}
-	}else
-	if(command=="pack"){
-		if(command==args.back())
-			cygnus::error(1,"no input directory");
-		else{
-			for(std::size_t i=1;i<args.size();i++){
-				FILE* pipe=popen(("pack.py pack "+args[i]).c_str(),"r");
-				if(pipe==nullptr)
-					std::fprintf(stderr,"%s\n",strerror(errno));
-				std::string errorInfo{""};
-				char tmp{'\0'};
-				while((tmp=std::fgetc(pipe))!=EOF)errorInfo.push_back(tmp);
-				std::fprintf(stderr,"%s",errorInfo.c_str());
-				return pclose(pipe)/256;
-			}
-		}
-	}else
-	if(command=="unpack"){
-		if(command==args.back())
-			cygnus::error(1,"no input package");
-		else{
-			for(std::size_t i=1;i<args.size();i++){
-				FILE* pipe=popen(("pack.py unpack "+args[i]).c_str(),"r");
-				if(pipe==nullptr)
-					std::fprintf(stderr,"%s\n",strerror(errno));
-				std::string errorInfo{""};
-				char tmp{'\0'};
-				while((tmp=std::fgetc(pipe))!=EOF)errorInfo.push_back(tmp);
-				std::fprintf(stderr,"%s",errorInfo.c_str());
-				return pclose(pipe)/256;
-			}
-		}
-	}else
-	if(command=="remove"){
-		if(command==args.back())
-			cygnus::error(1,"no input package");
-		else{
-			for(std::size_t i=1;i<args.size();i++){
-				FILE* pipe=popen(("pack.py remove "+args[i]+".tar").c_str(),"r");
-				if(pipe==nullptr)
-					std::fprintf(stderr,"%s\n",strerror(errno));
-				std::string errorInfo{""};
-				char tmp{'\0'};
-				while((tmp=std::fgetc(pipe))!=EOF)errorInfo.push_back(tmp);
-				std::fprintf(stderr,"%s",errorInfo.c_str());
-				return pclose(pipe)/256;
-			}
-		}
 	}
-	else;
 
 	return 0;
 }

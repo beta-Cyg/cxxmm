@@ -10,6 +10,8 @@ std::map<std::string,std::string>config;
 
 void init(const char* conf){
 	std::fstream getconf(conf,std::ios::in);
+	if(getconf.fail())
+		throw std::ios_base::failure("cannot open server.conf");
 	std::string path;
 	getconf>>path;
 	config["PATH"]=path;
@@ -23,7 +25,7 @@ int main(int argc,char **argv){
 		}
 		init(argv[1]);
 		boost::asio::io_context io_context;
-		tcp::acceptor acceptor(io_context, tcp::endpoint(tcp::v4(), 13));
+		tcp::acceptor acceptor(io_context, tcp::endpoint(tcp::v4(), 1000));
 		for(;;){
 			tcp::socket socket(io_context);
 			acceptor.accept(socket);
@@ -36,20 +38,22 @@ int main(int argc,char **argv){
 			size_t len=socket.read_some(boost::asio::buffer(buf),error);
 			if(error)
 				throw boost::system::system_error(error);
-			for(int i=0;i<len;i++)
+			for(size_t i=0;i<len;i++)
 				pkgname.push_back(buf[i]);
 
 			for(int i=0;i<128;i++)
 				buf[i]=0;
 			std::fstream fin(config["PATH"]+pkgname+".tar",std::ios::in|std::ios::binary);
-			while(len=fin.readsome(buf.data(),128)){
+			if(fin.fail())
+				std::cerr<<"cannot open "+config["PATH"]+pkgname+".tar"<<std::endl;
+			while((len=fin.readsome(buf.data(),128))){
 				//std::cout.write(buf.data(),len);
 				boost::asio::write(socket,boost::asio::buffer(buf,len),error);
 			}
 		}
 	}
 	catch(std::exception& e){
-		std::cerr << e.what() << std::endl;
+		std::cerr<<e.what()<<std::endl;
 	}
 
 	return 0;

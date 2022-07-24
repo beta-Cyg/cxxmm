@@ -1,1 +1,2 @@
 - finish coding cpm
+- coding install module

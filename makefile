@@ -4,15 +4,20 @@ SHELLRC=~/.bashrc
 LINK_PATH=lib/
 PWD:=$(shell pwd)
 
-compile: main
+compile: ini main cpm
 
 install: bin/cxxmm shell/pack.py
 	@echo "export PATH=\"$(PWD)/build\":\"$(PWD)/shell\":$$PATH" >> $(SHELLRC)
 
-cpm: cpm/*
-	   cd cpm/&&make
+cpm: client server
 
-main: ini make src/main.cpp
+client: src/client.cpp log
+	$(CXX) $(OPT) $(VER) src/client.cpp -o bin/cpm -L$(LINK_PATH) -lpthread -llog
+
+server: src/server.cpp
+	$(CXX) $(OPT) $(VER) src/server.cpp -o bin/server -L$(LINK_PATH) -lpthread
+
+main: make src/main.cpp
 	$(CXX) $(OPT) $(VER) src/main.cpp -o bin/cxxmm -L$(LINK_PATH) -lmake
 
 make: result split tree src/make.h src/make.cpp
@@ -46,4 +51,3 @@ ini:
 
 clean:
 	@rm -rf bin/ lib/
-	@cd cpm/&&make clean
