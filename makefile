@@ -12,7 +12,7 @@ install: bin/cxxmm shell/pack.py
 cpm: client server
 
 client: src/client.cpp log
-	$(CXX) $(OPT) $(VER) src/client.cpp -o bin/cpm -L$(LINK_PATH) -lpthread -llog
+	$(CXX) $(OPT) $(VER) src/client.cpp -o bin/cpm -L$(LINK_PATH) -lpthread -llog -lsplit
 
 server: src/server.cpp
 	$(CXX) $(OPT) $(VER) src/server.cpp -o bin/server -L$(LINK_PATH) -lpthread
@@ -42,9 +42,6 @@ log: src/make/log.h src/make/log.cpp
 
 test: bin/cxxmm shell/pack.py
 	@cd ctest&&make&&make clean
-	@cxxmm pack ctest
-	@cxxmm unpack ctest
-	@cxxmm remove ctest
 
 ini:
 	@mkdir -p bin/ lib/

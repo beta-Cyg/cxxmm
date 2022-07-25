@@ -79,9 +79,37 @@ As the title shows, this program is a module manager for C++. But in fact, now i
 	```
 	cpm will remove the package ```test.tar```
 
-## More Info
+- Install
+	```sh
+	cpm install [package]
+	```
+	e.g.
+	```sh
+	cpm install test
+	```
+	cpm will get and compile package ```test.tar```
+
+## About Package
 - package format of cxxmm is tar
 - the pack module of cxxmm depends on python3
+- the format of package.conf
+
+```
+[package]
+<package name e.g. test>
+
+[version]
+<version e.g. 0.0.1>
+
+[dependence]
+<dependences e.g. a b (if no dependences, use null)>
+
+[install]
+<install shell e.g. g++ main.cpp -o main (if needn't install, use null)>
+
+[remove]
+<uninstall shell e.g. rm main.cpp main (if needn't install, use null)>
+```
 
 ## Issues
 - cxxmm cannot print error information when pack.py has problems.
