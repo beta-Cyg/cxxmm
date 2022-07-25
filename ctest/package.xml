@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cpm>
+	<package>ctest</package>
+	<version>0.0.1</version>
+	<dependence>null</dependence>
+	<install>make</install>
+	<remove>null</remove>
+</cpm>

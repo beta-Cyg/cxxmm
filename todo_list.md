@@ -1,2 +1,1 @@
-- finish coding cpm
-- coding install module
+- remove: remove the directory at the same time

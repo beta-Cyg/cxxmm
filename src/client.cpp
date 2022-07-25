@@ -6,6 +6,8 @@
 #include<cstdlib>
 #include<boost/array.hpp>
 #include<boost/asio.hpp>
+#include<boost/property_tree/ptree.hpp>
+#include<boost/property_tree/xml_parser.hpp>
 
 #include"make/log.h"
 #include"make/split.h"
@@ -93,46 +95,9 @@ int remove(const std::string& pkg){
 	return pclose(pipe)/256;
 }
 
-std::map<std::string,std::string> get_install_config(std::string path){
-	std::map<std::string,std::string>config;
-	std::fstream getconf(path,std::ios::in);
-	if(getconf.fail()){
-		getconf.close();
-		throw std::ios_base::failure("cannot find package.conf");
-	}
-	std::string line;
-	while(getline(getconf,line)){
-		if(line=="[package]"){
-			getline(getconf,line);
-			config["package"]=line;
-		}else
-		if(line=="[version]"){
-			getline(getconf,line);
-			config["version"]=line;
-		}else
-		if(line=="[dependence]"){
-			getline(getconf,line);
-			if(line=="null")line.clear();
-			config["dependence"]=line;
-		}else
-		if(line=="[install]"){
-			while(getline(getconf,line)){
-				if(line=="[remove]")goto remove;
-				if(line=="null")line.clear();
-				if(config.find("install")==config.end())
-					config["install"]=line+"\n";
-				else config["install"]+=line+"\n";
-			}
-		}else
-		remove:if(line=="[remove]"){
-			while(getline(getconf,line)){
-				if(line=="null")line.clear();
-				if(config.find("remove")==config.end())
-					config["remove"]=line+"\n";
-				else config["remove"]+=line+"\n";
-			}
-		}
-	}
+boost::property_tree::ptree get_install_config(std::string path){
+	boost::property_tree::ptree config;
+	boost::property_tree::read_xml(path,config);
 	return config;
 }
 
@@ -141,7 +106,7 @@ int install(const std::string& pkg){
 		cygnus::error(1,"no input package");
 	std::string real_path{std::string(std::getenv("HOME"))+"/inst_pkg/"+pkg};
 
-	std::fstream check(real_path+"/package.conf",std::ios::in);
+	std::fstream check(real_path+"/package.xml",std::ios::in);
 	if(not check.fail()){
 		check.close();
 		cygnus::warn((pkg+" has been installed").c_str());
@@ -155,14 +120,21 @@ int install(const std::string& pkg){
 
 	unpack(real_path);
 
-	auto config=get_install_config(real_path+"/package.conf");
-	if(not config["dependence"].empty()){
+	auto config=get_install_config(real_path+"/package.xml");
+
+	for(auto& i:config.get_child("cpm")){
+		if(i.second.data()=="null")i.second.data()="";
+	}
+	//std::cerr<<"dependence="<<config.get<std::string>("cpm.dependence");
+
+	if(not config.get<std::string>("cpm.dependence").empty()){
 		auto f=[](std::string& s){
 			while(s.front()==' ')
 				s.erase(0,1);
 		};
-		f(config["dependence"]);
-		auto dependences=cygnus::split(config["dependence"]," ");
+		std::string dependence=config.get<std::string>("cpm.dependence");
+		f(dependence);
+		auto dependences=cygnus::split(dependence," ");
 		for(auto& i:dependences){
 			f(i);
 			install(i);
@@ -170,7 +142,7 @@ int install(const std::string& pkg){
 	}
 	//std::cerr<<config["install"]<<std::endl;//debug
 	chdir(real_path.c_str());
-	FILE* pipe=popen(config["install"].c_str(),"r");
+	FILE* pipe=popen(config.get<std::string>("cpm.install").c_str(),"r");
 	if(pipe==nullptr)
 		std::fprintf(stderr,"%s\n",strerror(errno));
 	std::string errorInfo{""};

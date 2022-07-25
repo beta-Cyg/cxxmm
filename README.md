@@ -92,23 +92,29 @@ As the title shows, this program is a module manager for C++. But in fact, now i
 ## About Package
 - package format of cxxmm is tar
 - the pack module of cxxmm depends on python3
-- the format of package.conf
+- the format of package.xml
 
-```
-[package]
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<package>
 <package name e.g. test>
+</package>
 
-[version]
+<version>
 <version e.g. 0.0.1>
+</version>
 
-[dependence]
+<dependence>
 <dependences e.g. a b (if no dependences, use null)>
+</dependence>
 
-[install]
+<install>
 <install shell e.g. g++ main.cpp -o main (if needn't install, use null)>
+</dependence>
 
-[remove]
+<remove>
 <uninstall shell e.g. rm main.cpp main (if needn't install, use null)>
+</remove>
 ```
 
 ## Issues
