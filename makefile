@@ -1,4 +1,4 @@
-OPT=-O2 -Wall
+OPT=-O2 -Wall -Wextra
 VER=-std=c++11
 SHELLRC=~/.bashrc
 LINK_PATH=lib/
