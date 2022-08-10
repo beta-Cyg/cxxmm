@@ -96,25 +96,27 @@ As the title shows, this program is a module manager for C++. But in fact, now i
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<package>
-<package name e.g. test>
-</package>
+<cpm>
+	<package>
+	<package name e.g. test>
+	</package>
 
-<version>
-<version e.g. 0.0.1>
-</version>
+	<version>
+	<version e.g. 0.0.1>
+	</version>
 
-<dependence>
-<dependences e.g. a b (if no dependences, use null)>
-</dependence>
+	<dependence>
+	<dependences e.g. a b (if no dependences, use null)>
+	</dependence>
 
-<install>
-<install shell e.g. g++ main.cpp -o main (if needn't install, use null)>
-</install>
+	<install>
+	<install shell e.g. g++ main.cpp -o main (if needn't install, use null)>
+	</install>
 
-<remove>
-<uninstall shell e.g. rm main.cpp main (if needn't install, use null)>
-</remove>
+	<remove>
+	<uninstall shell e.g. rm main.cpp main (if needn't install, use null)>
+	</remove>
+</cpm>
 ```
 
 ## Issues
