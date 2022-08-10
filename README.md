@@ -110,7 +110,7 @@ As the title shows, this program is a module manager for C++. But in fact, now i
 
 <install>
 <install shell e.g. g++ main.cpp -o main (if needn't install, use null)>
-</dependence>
+</install>
 
 <remove>
 <uninstall shell e.g. rm main.cpp main (if needn't install, use null)>
