@@ -77,7 +77,7 @@ As the title shows, this program is a module manager for C++. But in fact, now i
 	```sh
 	cpm get test
 	```
-	cpm will remove the package ```test.tar```
+	cpm will download the package ```test.tar```
 
 - Install
 	```sh
@@ -87,7 +87,7 @@ As the title shows, this program is a module manager for C++. But in fact, now i
 	```sh
 	cpm install test
 	```
-	cpm will get and compile package ```test.tar```
+	cpm will download and compile package ```test.tar```
 
 ## About Package
 - package format of cxxmm is tar
