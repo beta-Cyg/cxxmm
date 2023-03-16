@@ -46,7 +46,7 @@ int main(int argc,char **argv){
 			std::fstream fin(config["PATH"]+pkgname+".tar",std::ios::in|std::ios::binary);
 			if(fin.fail())
 				std::cerr<<"cannot open "+config["PATH"]+pkgname+".tar"<<std::endl;
-			while((len=fin.readsome(buf.data(),128))){
+			while(len=fin.readsome(buf.data(),128)){
 				//std::cout.write(buf.data(),len);
 				boost::asio::write(socket,boost::asio::buffer(buf,len),error);
 			}
